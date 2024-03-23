@@ -1,0 +1,16 @@
+For spaCy, after installing the package, you need to download the language model. For English, you can do this with:
+python -m spacy download en_core_web_sm
+
+
+
+
+
+python cluster.py --data texts.csv --clusters 5
+
+
+
+
+install for audio Record
+brew install portaudio
+
+

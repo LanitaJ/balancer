@@ -17,10 +17,11 @@ Note:
 
 import concurrent.futures
 import speech_recognition as sr
+from speech_recognition import Recognizer
 import sys
 
 def transcribe_audio(audio_path):
-    recognizer = sr.Recognizer()
+    recognizer: Recognizer = sr.Recognizer()
     try:
         with sr.AudioFile(audio_path) as source:
             audio_data = recognizer.record(source)

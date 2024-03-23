@@ -63,15 +63,17 @@ def parallel_clustering(texts, n_clusters):
     # For simplicity, this example does not include the actual division logic
     texts_sublists = [texts] # Replace with actual division of texts into sublists
     
-    with concurrent.futures.ProcessPoolExecutor() as executor:
+    # with concurrent.futures.ProcessPoolExecutor(max_workers=2) as executor:
         # Map each sublist of texts to the clustering function
-        results = executor.map(lambda texts_subset: cluster_texts(texts_subset, n_clusters), texts_sublists)
-        
-        # Combine results from all processes
-        cluster_assignments = []
-        for result in results:
-            cluster_assignments.extend(result)
-        return cluster_assignments
+    # results = executor.map(lambda texts_subset: cluster_texts(texts_subset, n_clusters), texts_sublists)
+    results = []
+    for text in texts_sublists:
+        results.append(cluster_texts(text, n_clusters))
+    # Combine results from all processes
+    cluster_assignments = []
+    for result in results:
+        cluster_assignments.extend(result)
+    return cluster_assignments
 
 def main(dataset_path, n_clusters):
     # Load dataset
@@ -80,7 +82,8 @@ def main(dataset_path, n_clusters):
     
     # Preprocess texts
     preprocessed_texts = preprocess_texts(texts)
-    
+
+    print(preprocessed_texts)
     # Perform parallel clustering
     cluster_assignments = parallel_clustering(preprocessed_texts, n_clusters)
     
