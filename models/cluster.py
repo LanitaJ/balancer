@@ -75,21 +75,21 @@ def parallel_clustering(texts, n_clusters):
         cluster_assignments.extend(result)
     return cluster_assignments
 
-def main(dataset_path, n_clusters):
-    # Load dataset
-    df = pd.read_csv(dataset_path)
-    texts = df['text_column'].tolist() # Adjust 'text_column' to your dataset's specific text column name
-    
-    # Preprocess texts
-    preprocessed_texts = preprocess_texts(texts)
+def process(file_path, n_clusters):
 
-    print(preprocessed_texts)
-    # Perform parallel clustering
-    cluster_assignments = parallel_clustering(preprocessed_texts, n_clusters)
-    
-    # Output or visualize clustering results
-    # This part is left as an exercise for further implementation
-    print(cluster_assignments)
+    with open(file_path, 'r') as file:
+        text = file.read()
+        # Preprocess texts
+        preprocessed_texts = preprocess_texts(text)
+
+        # print(preprocessed_texts)
+        # Perform parallel clustering
+        cluster_assignments = parallel_clustering(preprocessed_texts, n_clusters)
+        
+        # Output or visualize clustering results
+        # This part is left as an exercise for further implementation
+        print(cluster_assignments)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Parallel Text Clustering")
@@ -97,4 +97,4 @@ if __name__ == "__main__":
     parser.add_argument('--clusters', type=int, help="Number of clusters")
     
     args = parser.parse_args()
-    main(args.data, args.clusters)
+    process(args.data, args.clusters)

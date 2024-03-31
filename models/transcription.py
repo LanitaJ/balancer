@@ -34,16 +34,18 @@ def transcribe_audio(audio_path):
     except sr.RequestError as e:
         return audio_path, f"Error: Could not request results; {e}"
 
-def main(audio_paths):
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        futures = [executor.submit(transcribe_audio, path) for path in audio_paths]
-        for future in concurrent.futures.as_completed(futures):
-            audio_path, transcription = future.result()
-            print(f"\nFile: {audio_path}\nTranscribed Text: {transcription}")
+def process(audio_path):
+    transcription = transcribe_audio(audio_path)
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     futures = [executor.submit(transcribe_audio, path) for path in audio_paths]
+    #     for future in concurrent.futures.as_completed(futures):
+    #         audio_path, transcription = future.result()
+    print(f"\nFile: {audio_path}\nTranscribed Text: {transcription}")
+    return transcription
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python parallel_transcribe_audio.py path/to/audio1.wav path/to/audio2.wav ...")
     else:
         audio_paths = sys.argv[1:]
-        main(audio_paths)
+        process(audio_paths)

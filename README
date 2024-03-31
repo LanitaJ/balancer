@@ -2,7 +2,7 @@ For spaCy, after installing the package, you need to download the language model
 python -m spacy download en_core_web_sm
 
 
-
+uvicorn balancer:app --reload
 
 
 python cluster.py --data texts.csv --clusters 5
@@ -14,3 +14,36 @@ install for audio Record
 brew install portaudio
 
 
+
+
+DATA = [Batch1, Batch2, Batch3, ...]
+Batch = {
+          type1 : [dir_files1, dir_files2, ...],
+          type2 : [dir_files1, dir_files2, ...], 
+          ...
+        }
+
+{
+  "data": [
+              {
+                  "clusterization" : ["file1", "file2"],
+                  "transcription" : ["file3", "file4"],
+                  "summarization" : ["file4","file5", "file6"]
+              },
+              {
+                  "clusterization" : ["file7", "file8"],
+                  "transcription" : ["file9", "file10"],
+                  "summarization" : ["file9","file10", "file11"]
+              },   
+           ]
+}
+
+
+{
+  "data": {
+              "emotion" : ["leo_8.txt", "leo_14.txt", "leo_115.txt", "leo_80.txt", "leo_70.txt", "leo_22.txt", "leo_85.txt", "leo_30.txt", "leo_87.txt", "leo_119.txt", "leo_109.txt", "leo_78.txt", "leo_74.txt", "leo_72.txt", "leo_52.txt", "leo_2.txt", "leo_89.txt", "leo_38.txt", "leo_28.txt", "leo_34.txt", "leo_60.txt", "leo_16.txt", "leo_111.txt", "leo_32.txt", "leo_97.txt", "leo_46.txt", "leo_82.txt", "leo_42.txt", "leo_99.txt", "leo_56.txt", "leo_103.txt", "leo_6.txt", "leo_107.txt", "leo_113.txt", "leo_18.txt", "leo_0.txt", "happy.txt", "leo_62.txt", "leo_4.txt", "leo_105.txt", "leo_66.txt", "leo_93.txt", "leo_20.txt", "leo_12.txt", "leo_68.txt", "leo_40.txt", "leo_10.txt", "leo_117.txt", "leo_64.txt", "leo_76.txt", "leo_95.txt", "leo_101.txt", "leo_26.txt", "leo_54.txt", "leo_84.txt", "leo_58.txt", "leo_24.txt", "leo_44.txt", "leo_91.txt", "leo_36.txt", "leo_50.txt", "scary.txt", "leo_48.txt"],
+              "transcription" : ["file3", "file4"],
+              "summarization" : ["leo_14.txt", "leo_70.txt", "leo_119.txt", "leo_28.txt", "leo_42.txt", "leo_56.txt", "leo_0.txt", "leo_105.txt", "leo_84.txt", "leo_91.txt", "test.txt"]
+  },
+  "available_cores": 8
+}
