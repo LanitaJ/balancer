@@ -16,8 +16,8 @@ brew install portaudio
 
 
 
-DATA = [Batch1, Batch2, Batch3, ...]
-Batch = {
+DATA = [Event1, Event2, Event3, ...]
+Event = {
           type1 : [dir_files1, dir_files2, ...],
           type2 : [dir_files1, dir_files2, ...], 
           ...
